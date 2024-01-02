@@ -463,7 +463,7 @@ use Faker\Container\ContainerInterface;
  *
  * @property string $lastName
  *
- * @method string lastName()
+ * @method string lastName($gender = null)
  *
  * @property string $title
  *
