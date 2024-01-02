@@ -28,6 +28,9 @@ final class CompanyTest extends TestCase
         $this->faker->calculateModulus97(123);
     }
 
+    /**
+     * @requires PHP < 8.3
+     */
     public function testVat(): void
     {
         $this->assertDefaultVatFormat($this->faker->vat());
@@ -39,6 +42,9 @@ final class CompanyTest extends TestCase
         self::assertEquals(1, preg_match('/^GB[\d]{3} [\d]{4} [\d]{2}$/', $number));
     }
 
+    /**
+     * @requires PHP < 8.3
+     */
     public function testVatBranchType(): void
     {
         $number = $this->faker->vat(Company::VAT_TYPE_BRANCH);

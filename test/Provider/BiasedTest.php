@@ -44,6 +44,9 @@ final class BiasedTest extends TestCase
         }
     }
 
+    /**
+     * @requires PHP < 8.3
+     */
     public function testLinearHigh(): void
     {
         $this->performFake(['\Faker\Provider\Biased', 'linearHigh']);

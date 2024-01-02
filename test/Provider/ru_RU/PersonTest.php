@@ -34,6 +34,8 @@ final class PersonTest extends TestCase
     }
 
     /**
+     * @requires PHP < 8.3
+     *
      * @dataProvider dataLastNameMale
      */
     public function testLastNameMale(int $seed, string $expected): void
@@ -80,6 +82,8 @@ final class PersonTest extends TestCase
     }
 
     /**
+     * @requires PHP < 8.3
+     *
      * @dataProvider dataLastNameFemale
      */
     public function testLastNameFemale(int $seed, string $expected): void
@@ -127,6 +131,8 @@ final class PersonTest extends TestCase
 
     /**
      * Issue 832
+     *
+     * @requires PHP < 8.3
      *
      * @dataProvider dataFemaleSurnameWithoutDoubleALetter
      */
