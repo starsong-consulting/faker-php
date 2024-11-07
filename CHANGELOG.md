@@ -2,6 +2,7 @@
 
 ## [Unreleased](https://github.com/FakerPHP/Faker/compare/v1.23.0...main)
 
+- Added support for PHP 8.4 (#904)
 - Fixed double `а` female lastName in `ru_RU/Person::name()` (#832)
 - Fixed polish license plates (#685)
 - Removed legacy autoloader (#762)
