@@ -3,6 +3,7 @@
 ## [Unreleased](https://github.com/FakerPHP/Faker/compare/v1.23.0...main)
 
 - Removed domain `gmail.com.au` from `Provider\en_AU\Internet` (#886)
+- Refreshed ISO currencies (#919)
 - Added support for PHP 8.4 (#904)
 - Fixed double `а` female lastName in `ru_RU/Person::name()` (#832)
 - Fixed polish license plates (#685)
