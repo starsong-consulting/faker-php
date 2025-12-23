@@ -5,6 +5,7 @@
 - Removed domain `gmail.com.au` from `Provider\en_AU\Internet` (#886)
 - Refreshed ISO currencies (#919)
 - Improved italian phone number formats (#950)
+- Replaced `via.placeholder.com` with `placehold.co` in Image provider (#1013)
 - Add missing return type in annotations (#923)
 - Added support for PHP 8.4 (#904)
 - Fixed double `а` female lastName in `ru_RU/Person::name()` (#832)
