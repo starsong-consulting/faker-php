@@ -565,9 +565,24 @@ class Generator
      */
     private $uniqueGenerator;
 
+    /**
+     * @var \Random\Randomizer|null PHP 8.2+ only
+     */
+    private $randomizer;
+
+    /**
+     * @var int|null Seed for this instance (used with Randomizer on PHP 8.2+)
+     */
+    private $instanceSeed;
+
     public function __construct(?ContainerInterface $container = null)
     {
         $this->container = $container ?: Container\ContainerBuilder::withDefaultExtensions()->build();
+
+        // Initialize per-instance randomizer on PHP 8.2+
+        if (PHP_VERSION_ID >= 80200) {
+            $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937());
+        }
     }
 
     /**
@@ -682,13 +697,54 @@ class Generator
         return new ValidGenerator($this, $validator, $maxRetries);
     }
 
+    /**
+     * Seed the random number generator.
+     *
+     * On PHP 8.2+, this seeds the instance-level generator, providing isolation
+     * between faker instances. On older PHP versions, this seeds the global
+     * mt_rand state which is shared between all faker instances.
+     *
+     * @param int|null $seed The seed value, or null to use a random seed
+     */
     public function seed($seed = null)
     {
-        if ($seed === null) {
-            mt_srand();
+        $this->instanceSeed = $seed !== null ? (int) $seed : null;
+
+        if (PHP_VERSION_ID >= 80200) {
+            // Use per-instance Randomizer for true isolation
+            if ($seed === null) {
+                $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937());
+            } else {
+                $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937((int) $seed));
+            }
         } else {
-            mt_srand((int) $seed, self::mode());
+            // Fall back to global mt_rand state on older PHP
+            if ($seed === null) {
+                mt_srand();
+            } else {
+                mt_srand((int) $seed, self::mode());
+            }
         }
+    }
+
+    /**
+     * Generate a random integer between $min and $max (inclusive).
+     *
+     * On PHP 8.2+, this uses the instance-level generator for isolation.
+     * On older PHP, this uses mt_rand (global state).
+     *
+     * @param int $min Minimum value
+     * @param int $max Maximum value
+     *
+     * @return int
+     */
+    public function randomInt(int $min = 0, int $max = 2147483647): int
+    {
+        if (PHP_VERSION_ID >= 80200 && $this->randomizer !== null) {
+            return $this->randomizer->getInt($min, $max);
+        }
+
+        return mt_rand($min, $max);
     }
 
     /**

@@ -3,18 +3,30 @@
 namespace Faker\Core;
 
 use Faker\Extension;
+use Faker\Generator;
 
 /**
  * @experimental This class is experimental and does not fall under our BC promise
  */
-final class Uuid implements Extension\UuidExtension
+final class Uuid implements Extension\UuidExtension, Extension\GeneratorAwareExtension
 {
     private Extension\NumberExtension $numberExtension;
 
     public function __construct(?Extension\NumberExtension $numberExtension = null)
     {
-
         $this->numberExtension = $numberExtension ?: new Number();
+    }
+
+    public function withGenerator(Generator $generator): Extension\Extension
+    {
+        $instance = clone $this;
+
+        // Propagate generator to number extension if it supports it
+        if ($this->numberExtension instanceof Extension\GeneratorAwareExtension) {
+            $instance->numberExtension = $this->numberExtension->withGenerator($generator);
+        }
+
+        return $instance;
     }
 
     public function uuid3(): string
