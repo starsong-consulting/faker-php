@@ -5,16 +5,32 @@ declare(strict_types=1);
 namespace Faker\Core;
 
 use Faker\Extension;
+use Faker\Generator;
 
 /**
  * @experimental This class is experimental and does not fall under our BC promise
  */
-final class Number implements Extension\NumberExtension
+final class Number implements Extension\NumberExtension, Extension\GeneratorAwareExtension
 {
+    private ?Generator $generator = null;
+
+    public function withGenerator(Generator $generator): Extension\Extension
+    {
+        $instance = clone $this;
+        $instance->generator = $generator;
+
+        return $instance;
+    }
+
     public function numberBetween(int $min = 0, int $max = 2147483647): int
     {
         $int1 = min($min, $max);
         $int2 = max($min, $max);
+
+        // Use Generator's instance-level random when available (PHP 8.2+)
+        if ($this->generator !== null) {
+            return $this->generator->randomInt($int1, $int2);
+        }
 
         return Extension\Helper::randomNumberBetween($int1, $int2);
     }
@@ -60,7 +76,10 @@ final class Number implements Extension\NumberExtension
             $max = $tmp;
         }
 
-        return round($min + $this->numberBetween() / Extension\Helper::largestRandomNumber() * ($max - $min), $nbMaxDecimals);
+        // Use consistent max value for float calculation
+        $randMax = 2147483647;
+
+        return round($min + $this->numberBetween(0, $randMax) / $randMax * ($max - $min), $nbMaxDecimals);
     }
 
     public function randomNumber(?int $nbDigits = null, bool $strict = false): int

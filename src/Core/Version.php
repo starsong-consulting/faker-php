@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Faker\Core;
 
 use Faker\Extension;
+use Faker\Generator;
 use Faker\Provider\DateTime;
 
 /**
  * @experimental This class is experimental and does not fall under our BC promise
  */
-final class Version implements Extension\VersionExtension
+final class Version implements Extension\VersionExtension, Extension\GeneratorAwareExtension
 {
     private Extension\NumberExtension $numberExtension;
     /**
@@ -20,8 +21,18 @@ final class Version implements Extension\VersionExtension
 
     public function __construct(Extension\NumberExtension $numberExtension)
     {
-
         $this->numberExtension = $numberExtension;
+    }
+
+    public function withGenerator(Generator $generator): Extension\Extension
+    {
+        $instance = clone $this;
+
+        if ($this->numberExtension instanceof Extension\GeneratorAwareExtension) {
+            $instance->numberExtension = $this->numberExtension->withGenerator($generator);
+        }
+
+        return $instance;
     }
 
     /**

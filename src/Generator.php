@@ -565,9 +565,19 @@ class Generator
      */
     private $uniqueGenerator;
 
+    /**
+     * @var \Random\Randomizer|null PHP 8.2+ only
+     */
+    private $randomizer;
+
     public function __construct(?ContainerInterface $container = null)
     {
         $this->container = $container ?: Container\ContainerBuilder::withDefaultExtensions()->build();
+
+        // Initialize per-instance randomizer on PHP 8.2+
+        if (PHP_VERSION_ID >= 80200) {
+            $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937());
+        }
     }
 
     /**
@@ -682,13 +692,52 @@ class Generator
         return new ValidGenerator($this, $validator, $maxRetries);
     }
 
+    /**
+     * Seed the random number generator.
+     *
+     * On PHP 8.2+, this seeds both the instance-level generator (for Core extensions)
+     * and the global mt_rand state (for backwards compatibility with legacy Providers).
+     * On older PHP versions, this only seeds the global mt_rand state.
+     *
+     * @param int|null $seed The seed value, or null to use a random seed
+     */
     public function seed($seed = null)
     {
+        // Always seed global mt_rand for backwards compatibility with legacy Providers
         if ($seed === null) {
             mt_srand();
         } else {
             mt_srand((int) $seed, self::mode());
         }
+
+        // On PHP 8.2+, also seed per-instance Randomizer for isolation in Core extensions
+        if (PHP_VERSION_ID >= 80200) {
+            if ($seed === null) {
+                $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937());
+            } else {
+                $this->randomizer = new \Random\Randomizer(new \Random\Engine\Mt19937((int) $seed));
+            }
+        }
+    }
+
+    /**
+     * Generate a random integer between $min and $max (inclusive).
+     *
+     * On PHP 8.2+, this uses the instance-level generator for isolation.
+     * On older PHP, this uses mt_rand (global state).
+     *
+     * @param int $min Minimum value
+     * @param int $max Maximum value
+     *
+     * @return int
+     */
+    public function randomInt(int $min = 0, int $max = 2147483647): int
+    {
+        if (PHP_VERSION_ID >= 80200 && $this->randomizer !== null) {
+            return $this->randomizer->getInt($min, $max);
+        }
+
+        return mt_rand($min, $max);
     }
 
     /**

@@ -49,10 +49,24 @@ class ChanceGenerator
      */
     public function __call($name, $arguments)
     {
-        if (Extension\Helper::randomNumberBetween(1, 100) <= (100 * $this->weight)) {
+        if ($this->randomNumberBetween(1, 100) <= (100 * $this->weight)) {
             return call_user_func_array([$this->generator, $name], $arguments);
         }
 
         return $this->default;
+    }
+
+    /**
+     * Generate a random number between $min and $max (inclusive).
+     *
+     * Uses Generator's instance-level random when available for isolation.
+     */
+    private function randomNumberBetween(int $min, int $max): int
+    {
+        if ($this->generator instanceof Generator) {
+            return $this->generator->randomInt($min, $max);
+        }
+
+        return Extension\Helper::randomNumberBetween($min, $max);
     }
 }
