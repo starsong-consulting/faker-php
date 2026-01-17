@@ -1033,8 +1033,8 @@ class Generator
         $this->seed();
     }
 
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
-        $this->formatters = [];
+        throw new \Exception('Generator cannot be unserialized');
     }
 }
