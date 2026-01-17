@@ -3,6 +3,7 @@
 namespace Faker;
 
 use Faker\Container\ContainerInterface;
+use Faker\Provider\Base;
 
 /**
  * @property string $citySuffix
@@ -555,6 +556,9 @@ use Faker\Container\ContainerInterface;
  */
 class Generator
 {
+    /**
+     * @var Base[]
+     */
     protected $providers = [];
     protected $formatters = [];
 
@@ -607,6 +611,9 @@ class Generator
         return $extension;
     }
 
+    /**
+     * @param Base $provider
+     */
     public function addProvider($provider)
     {
         array_unshift($this->providers, $provider);
@@ -614,6 +621,9 @@ class Generator
         $this->formatters = [];
     }
 
+    /**
+     * @return Base[]
+     */
     public function getProviders()
     {
         return $this->providers;
