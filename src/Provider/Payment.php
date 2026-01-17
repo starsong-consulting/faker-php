@@ -305,8 +305,14 @@ class Payment extends Base
      *
      * @return string Swift/Bic number
      */
-    public static function swiftBicNumber()
+    public static function swiftBicNumber(): string
     {
-        return self::regexify('^([A-Z]){4}([A-Z]){2}([0-9A-Z]){2}([0-9A-Z]{3})?$');
+        // BIC format per ISO 9362:
+        // - 4 letters: bank code
+        // - 2 letters: country code (ISO 3166-1 alpha-2)
+        // - 1 letter/digit: location code char 1 (0 and 1 not used)
+        // - 1 letter/digit: location code char 2 (O not used, could be confused with 0)
+        // - 3 letters/digits: branch code (optional, XXX for primary office)
+        return self::regexify('^[A-Z]{4}[A-Z]{2}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$');
     }
 }
