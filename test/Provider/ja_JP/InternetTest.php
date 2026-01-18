@@ -13,7 +13,7 @@ use Faker\Test\TestCase;
 final class InternetTest extends TestCase
 {
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testUserName(): void
     {
@@ -21,7 +21,7 @@ final class InternetTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDomainName(): void
     {

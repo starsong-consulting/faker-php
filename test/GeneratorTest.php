@@ -248,7 +248,7 @@ final class GeneratorTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testUniqueReturnsUniqueGeneratorThatGeneratesUniqueValues(): void
     {

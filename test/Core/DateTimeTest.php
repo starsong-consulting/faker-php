@@ -25,7 +25,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDateTime(): void
     {
@@ -36,7 +36,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDateTimeWithTimezone(): void
     {
@@ -48,7 +48,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDateTimeAD(): void
     {
@@ -59,7 +59,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDateTimeBetween(): void
     {
@@ -76,7 +76,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDateTimeInInterval(): void
     {
@@ -136,7 +136,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDate(): void
     {
@@ -147,7 +147,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testTime(): void
     {
@@ -158,7 +158,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testUnixTime(): void
     {
@@ -169,7 +169,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testUnitTimeWithNumericUntil(): void
     {
@@ -180,7 +180,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testIso8601(): void
     {
@@ -201,7 +201,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDayOfMonth(): void
     {
@@ -212,7 +212,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testDayOfWeek(): void
     {
@@ -223,7 +223,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testMonth(): void
     {
@@ -234,7 +234,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testMonthName(): void
     {
@@ -245,7 +245,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testYear(): void
     {
@@ -256,7 +256,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testCentury(): void
     {

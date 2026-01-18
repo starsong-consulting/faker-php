@@ -21,7 +21,7 @@ final class AddressTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testSecondaryAddress(): void
     {
@@ -30,7 +30,7 @@ final class AddressTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testRegion(): void
     {

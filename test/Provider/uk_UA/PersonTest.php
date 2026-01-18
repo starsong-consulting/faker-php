@@ -13,7 +13,7 @@ use Faker\Test\TestCase;
 final class PersonTest extends TestCase
 {
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testFirstNameMaleReturns(): void
     {
@@ -21,7 +21,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testFirstNameFemaleReturns(): void
     {
@@ -29,7 +29,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testMiddleNameMaleReturns(): void
     {
@@ -37,7 +37,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testMiddleNameFemaleReturns(): void
     {
@@ -45,7 +45,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testLastNameReturns(): void
     {

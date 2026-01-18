@@ -45,7 +45,7 @@ final class BiasedTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testLinearHigh(): void
     {

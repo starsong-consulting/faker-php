@@ -29,7 +29,7 @@ final class CompanyTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testVat(): void
     {
@@ -43,7 +43,7 @@ final class CompanyTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testVatBranchType(): void
     {

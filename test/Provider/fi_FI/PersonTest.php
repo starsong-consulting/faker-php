@@ -25,7 +25,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      *
      * @dataProvider provideSeedAndExpectedReturn
      */

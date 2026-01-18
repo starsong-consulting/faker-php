@@ -13,7 +13,7 @@ use Faker\Test\TestCase;
 final class ColorTest extends TestCase
 {
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testColorName(): void
     {
@@ -22,7 +22,7 @@ final class ColorTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      */
     public function testSafeColorName(): void
     {

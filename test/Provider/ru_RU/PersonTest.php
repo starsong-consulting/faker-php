@@ -34,7 +34,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      *
      * @dataProvider dataLastNameMale
      */
@@ -82,7 +82,7 @@ final class PersonTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      *
      * @dataProvider dataLastNameFemale
      */
@@ -132,7 +132,7 @@ final class PersonTest extends TestCase
     /**
      * Issue 832
      *
-     * @requires PHP < 8.3
+     * @requires PHP < 8.2
      *
      * @dataProvider dataFemaleSurnameWithoutDoubleALetter
      */
