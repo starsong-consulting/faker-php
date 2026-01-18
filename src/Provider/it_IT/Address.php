@@ -94,4 +94,19 @@ class Address extends \Faker\Provider\Address
     {
         return static::randomElement(static::$stateAbbr);
     }
+
+    /**
+     * Coordinates inside the border of Italy
+     *
+     * @example array('36.653819', '18.524718')
+     *
+     * @return array latitude, longitude
+     */
+    public static function localCoordinates(): array
+    {
+        return [
+            'latitude' => static::latitude(36.65, 47.10),
+            'longitude' => static::longitude(6.63, 18.52),
+        ];
+    }
 }
