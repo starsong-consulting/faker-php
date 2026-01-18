@@ -122,15 +122,16 @@ class Person extends \Faker\Provider\Person
      * @see http://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
      *
      * @param string $gender Person::GENDER_MALE || Person::GENDER_FEMALE
+     * @param bool $withCentury Include century in output (XXXXXXXX-XXXX vs XXXXXX-XXXX)
      *
-     * @return string on format XXXXXX-XXXX
+     * @return string on format XXXXXX-XXXX or XXXXXXXX-XXXX
      */
-    public function personalIdentityNumber(?\DateTime $birthdate = null, $gender = null)
+    public function personalIdentityNumber(?\DateTime $birthdate = null, $gender = null, bool $withCentury = false)
     {
         if (!$birthdate) {
             $birthdate = \Faker\Provider\DateTime::dateTimeThisCentury();
         }
-        $datePart = $birthdate->format('ymd');
+        $datePart = $birthdate->format($withCentury ? 'Ymd' : 'ymd');
         $randomDigits = $this->getBirthNumber($gender);
 
         $checksum = Luhn::computeCheckDigit($datePart . $randomDigits);
