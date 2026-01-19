@@ -1,18 +1,58 @@
 # CHANGELOG
 
-## [Unreleased](https://github.com/FakerPHP/Faker/compare/v1.23.0...main)
+## [Unreleased - 2.0](https://github.com/FakerPHP/Faker/compare/v1.24.0...2.0)
 
-- Removed domain `gmail.com.au` from `Provider\en_AU\Internet` (#886)
-- Refreshed ISO currencies (#919)
-- Improved italian phone number formats (#950)
-- Replaced `via.placeholder.com` with `placehold.co` in Image provider (#1013)
-- Add missing return type in annotations (#923)
-- Added support for PHP 8.4 (#904)
-- Fixed double `а` female lastName in `ru_RU/Person::name()` (#832)
-- Fixed polish license plates (#685)
+### Breaking Changes
+- Replaced deprecated `__wakeup` with `__unserialize` for PHP 8.1+ compatibility
 - Removed legacy autoloader (#762)
 - Removed functionality for populating ORM entities and models (#764)
-- Added a PHP version support policy (#752)
+
+### Added
+- Instance-isolated random state for PHP 8.2+ (each Faker instance now has independent seeding)
+- `stateAbbr()` method to `en_AU\Address` (cherry-pick from FakerPHP#927)
+- `countryCode` parameter to `swiftBicNumber()` in `Payment` (cherry-pick from FakerPHP#921)
+- `PhoneNumber` provider for `ar_EG` with landline and mobile formats (cherry-pick from FakerPHP#951)
+- `e164MobileNumber()` and `e164LandlineNumber()` to `pt_PT\PhoneNumber` (cherry-pick from FakerPHP#926)
+- `sq_AL` and `sq_XK` locales with Address and PhoneNumber providers (cherry-pick from FakerPHP#971)
+- Official Saudi job titles to `ar_SA\Company` (cherry-pick from FakerPHP#979)
+- Monaco (`fr_MC`) and San Marino (`it_SM`) IBAN providers
+
+### Fixed
+
+#### IBAN Validation
+IBANs are now generated with correct check digits for all supported countries:
+- `fr_FR`: Calculate clé RIB for valid French IBANs
+- `es_ES`: Calculate control digits for valid Spanish IBANs
+- `it_IT`: Calculate CIN for valid Italian IBANs
+- `nl_NL`: Apply 11-test for valid Dutch IBANs
+- `nl_BE`: Correct Belgian IBAN check digit calculation
+- `pt_PT`: Generate valid Portuguese IBANs with correct bank codes
+- `NO`, `SK`, `IS`: Add weighted MOD 11 algorithm
+- `ME`, `MK`, `RS`, `SI`: Add MOD 97-10 algorithm
+
+#### Other Fixes
+- `Payment`: Generate valid SWIFT/BIC numbers per ISO 9362 (positions 7-8 constraints)
+- `Miscellaneous`: Use full 128-bit output space for hash generators (md5/sha1/sha256)
+- `DateTime`: Support `DateTimeImmutable` in all DateTime generators
+- `UniqueGenerator`: Prevent memory exhaustion when chaining `unique()->optional()`
+- `boolean()`: Use high-precision float for probability calculation
+- `en_GB\Address`: Fixed invalid UK postcodes HR9 9AJ and TN34 9GL (cherry-pick from fzaninotto#1992)
+
+## [2024-11-09, v1.24.0](https://github.com/FakerPHP/Faker/compare/v1.23.1..v1.24.0)
+
+- Fix internal deprecations in Doctrine's populator by @gnutix (#889)
+- Fix mobile phone number pattern for France by @ker0x (#859)
+- PHP 8.4 Support by @Jubeki (#904)
+- Add missing return type in annotations (#923)
+- Removed domain `gmail.com.au` from `Provider\en_AU\Internet` (#886)
+- Refreshed ISO currencies (#919)
+- Improved Italian phone number formats (#950)
+- Replaced `via.placeholder.com` with `placehold.co` in Image provider (#1013)
+
+## [2023-09-29, v1.23.1](https://github.com/FakerPHP/Faker/compare/v1.23.0..v1.23.1)
+
+- Fixed double `а` female lastName in `ru_RU/Person::name()` (#832)
+- Fixed Polish license plates (#685)
 - Stopped using `static` in callables in `Provider\pt_BR\PhoneNumber` (#785)
 - Fixed incorrect female name (#794)
 - Stopped using the deprecated `MT_RAND_PHP` constant to seed the random generator on PHP 8.3 (#844)
