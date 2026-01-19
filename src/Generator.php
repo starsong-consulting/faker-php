@@ -749,6 +749,27 @@ class Generator
     }
 
     /**
+     * Generate a random float between $min and $max (inclusive).
+     *
+     * On PHP 8.3+, uses Randomizer::getFloat() for unbiased results.
+     * On older PHP, uses mt_rand-based calculation (has known bias).
+     *
+     * @see https://github.com/FakerPHP/Faker/issues/760
+     */
+    public function randomFloatBetween(float $min, float $max): float
+    {
+        if ($min > $max) {
+            [$min, $max] = [$max, $min];
+        }
+
+        if (PHP_VERSION_ID >= 80300 && $this->randomizer !== null) {
+            return $this->randomizer->getFloat($min, $max, \Random\IntervalBoundary::ClosedClosed);
+        }
+
+        return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+    }
+
+    /**
      * @see https://www.php.net/manual/en/migration83.deprecated.php#migration83.deprecated.random
      */
     private static function mode(): int

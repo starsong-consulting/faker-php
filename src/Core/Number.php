@@ -71,12 +71,15 @@ final class Number implements Extension\NumberExtension, Extension\GeneratorAwar
         }
 
         if ($min > $max) {
-            $tmp = $min;
-            $min = $max;
-            $max = $tmp;
+            [$min, $max] = [$max, $min];
         }
 
-        // Use consistent max value for float calculation
+        // Use Generator's seeded randomizer on PHP 8.3+ for unbiased results
+        if ($this->generator !== null && PHP_VERSION_ID >= 80300) {
+            return round($this->generator->randomFloatBetween($min, $max), $nbMaxDecimals);
+        }
+
+        // Fallback: mt_rand-based calculation (has known bias for certain inputs)
         $randMax = 2147483647;
 
         return round($min + $this->numberBetween(0, $randMax) / $randMax * ($max - $min), $nbMaxDecimals);
