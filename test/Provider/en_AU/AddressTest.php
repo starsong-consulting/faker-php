@@ -35,6 +35,14 @@ final class AddressTest extends TestCase
         self::assertMatchesRegularExpression('/[A-Z][a-z]+/', $state);
     }
 
+    public function testStateAbbr(): void
+    {
+        $stateAbbr = $this->faker->stateAbbr();
+        self::assertNotEmpty($stateAbbr);
+        self::assertIsString($stateAbbr);
+        self::assertMatchesRegularExpression('/^[A-Z]{2,3}$/', $stateAbbr);
+    }
+
     protected function getProviders(): iterable
     {
         yield new Address($this->faker);

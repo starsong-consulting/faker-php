@@ -109,4 +109,14 @@ class Address extends \Faker\Provider\en_US\Address
     {
         return static::randomElement(static::$state);
     }
+
+    /**
+     * Returns a sane state abbreviation
+     *
+     * @example NSW
+     */
+    public static function stateAbbr()
+    {
+        return static::randomElement(static::$stateAbbr);
+    }
 }
