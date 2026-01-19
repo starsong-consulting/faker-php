@@ -428,6 +428,26 @@ class Base
     }
 
     /**
+     * Returns a regex pattern that matches the innermost alternation group.
+     *
+     * This handles nested alternations like (a|(b|c)) by matching from
+     * the innermost group outward, and properly handles escaped brackets.
+     */
+    private static function getAlternationRegex(): string
+    {
+        // Matches "(". Does not match "\(".
+        $unescapedOpenBracket = '(?<!\\\\)\\(';
+
+        // Matches ")". Does not match "\)".
+        $unescapedCloseBracket = '(?<!\\\\)\\)';
+
+        // Begin our search with an unescaped open bracket.
+        // Then, find any content that doesn't contain another unescaped open bracket.
+        // Finish our search with an unescaped close bracket.
+        return '/' . $unescapedOpenBracket . '(?!.*' . $unescapedOpenBracket . ')' . '(.*?)' . $unescapedCloseBracket . '/';
+    }
+
+    /**
      * Replaces all hash sign ('#') occurrences with a random number
      * Replaces all percentage sign ('%') occurrences with a not null number
      *
@@ -563,9 +583,14 @@ class Base
             return str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3])));
         }, $regex);
         // (this|that) becomes 'this' or 'that'
-        $regex = preg_replace_callback('/\((.*?)\)/', static function ($matches) {
-            return Base::randomElement(explode('|', str_replace(['(', ')'], '', $matches[1])));
-        }, $regex);
+        // Process from innermost to outermost to handle nested alternations like (a|(b|c))
+        $alternationRegex = static::getAlternationRegex();
+
+        while (preg_match($alternationRegex, $regex)) {
+            $regex = preg_replace_callback($alternationRegex, static function ($matches) {
+                return Base::randomElement(explode('|', $matches[1]));
+            }, $regex);
+        }
         // All A-F inside of [] become ABCDEF
         $regex = preg_replace_callback('/\[([^\]]+)\]/', static function ($matches) {
             return '[' . preg_replace_callback('/(\w|\d)\-(\w|\d)/', static function ($range) {
