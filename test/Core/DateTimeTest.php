@@ -434,8 +434,7 @@ final class DateTimeTest extends TestCase
     }
 
     /**
-     * @requires PHP < 8.3
-     * @requires PHP >= 8.2
+     * @requires PHP ~8.2.0
      */
     public function testCenturyPhp82(): void
     {
