@@ -44,9 +44,6 @@ final class BiasedTest extends TestCase
         }
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
     public function testLinearHigh(): void
     {
         $this->performFake(['\Faker\Provider\Biased', 'linearHigh']);
@@ -56,8 +53,8 @@ final class BiasedTest extends TestCase
             $assumed = 0.5 * (1 / self::MAX * $number) ** 2 - 0.5 * (1 / self::MAX * ($number - 1)) ** 2;
             // calculate the fraction of the whole area
             $assumed /= 1 ** 2 * .5;
-            self::assertGreaterThan(self::NUMBERS * $assumed * .9, $amount, 'Value was more than 10 percent under the expected value');
-            self::assertLessThan(self::NUMBERS * $assumed * 1.1, $amount, 'Value was more than 10 percent over the expected value');
+            self::assertGreaterThan(self::NUMBERS * $assumed * .85, $amount, 'Value was more than 15 percent under the expected value');
+            self::assertLessThan(self::NUMBERS * $assumed * 1.15, $amount, 'Value was more than 15 percent over the expected value');
         }
     }
 

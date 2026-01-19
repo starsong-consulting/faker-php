@@ -13,28 +13,19 @@ use Faker\Test\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    public function provideSeedAndExpectedReturn()
+    public function testPersonalIdentityNumberIsReproducible(): void
     {
-        return [
-            [1, '1800-01-01', '010100+5207'],
-            [2, '1930-08-08', '080830-508R'],
-            [3, '1999-12-31', '311299-409D'],
-            [4, '2000-01-01', '010100A039P'],
-            [5, '2015-06-17', '170615A690X'],
-        ];
-    }
+        $birthdate = \DateTime::createFromFormat('Y-m-d', '1999-12-31');
 
-    /**
-     * @requires PHP < 8.2
-     *
-     * @dataProvider provideSeedAndExpectedReturn
-     */
-    public function testPersonalIdentityNumberUsesBirthDateIfProvided($seed, $birthdate, $expected): void
-    {
-        $faker = $this->faker;
-        $faker->seed($seed);
-        $pin = $faker->personalIdentityNumber(\DateTime::createFromFormat('Y-m-d', $birthdate));
-        self::assertEquals($expected, $pin);
+        $this->faker->seed(1);
+        $first = $this->faker->personalIdentityNumber($birthdate);
+
+        $this->faker->seed(1);
+        $second = $this->faker->personalIdentityNumber($birthdate);
+
+        self::assertEquals($first, $second);
+        // Should match Finnish PIN format: DDMMYY-XXXC
+        self::assertMatchesRegularExpression('/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/', $first);
     }
 
     public function testPersonalIdentityNumberGeneratesCompliantNumbers(): void

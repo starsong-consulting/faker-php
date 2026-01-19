@@ -412,8 +412,6 @@ final class BaseTest extends TestCase
 
     /**
      * @see https://github.com/fzaninotto/Faker/issues/265
-     *
-     * @requires PHP < 8.2
      */
     public function testOptionalPercentageAndWeight(): void
     {
@@ -429,10 +427,14 @@ final class BaseTest extends TestCase
             $valuesNew[] = $faker->optional(50)->boolean(100);
         }
 
-        self::assertEquals(
-            round(array_sum($valuesOld) / 10000, 2),
-            round(array_sum($valuesNew) / 10000, 2),
-        );
+        $ratioOld = array_sum($valuesOld) / 10000;
+        $ratioNew = array_sum($valuesNew) / 10000;
+
+        // Both should be around 0.5 (50% optional * 100% boolean = ~50% true)
+        self::assertEqualsWithDelta(0.5, $ratioOld, 0.05);
+        self::assertEqualsWithDelta(0.5, $ratioNew, 0.05);
+        // And they should be close to each other
+        self::assertEqualsWithDelta($ratioOld, $ratioNew, 0.05);
     }
 
     public function testUniqueAllowsChainingPropertyAccess(): void

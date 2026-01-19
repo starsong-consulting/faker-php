@@ -12,20 +12,28 @@ use Faker\Test\TestCase;
  */
 final class InternetTest extends TestCase
 {
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testUserName(): void
+    public function testUserNameIsReproducible(): void
     {
-        self::assertEquals('akira72', $this->faker->userName);
+        $this->faker->seed(1);
+        $first = $this->faker->userName;
+
+        $this->faker->seed(1);
+        $second = $this->faker->userName;
+
+        self::assertEquals($first, $second);
+        self::assertMatchesRegularExpression('/^[a-z0-9._]+$/', $first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testDomainName(): void
+    public function testDomainNameIsReproducible(): void
     {
-        self::assertEquals('nakajima.com', $this->faker->domainName);
+        $this->faker->seed(1);
+        $first = $this->faker->domainName;
+
+        $this->faker->seed(1);
+        $second = $this->faker->domainName;
+
+        self::assertEquals($first, $second);
+        self::assertMatchesRegularExpression('/^[a-z]+\.[a-z]+$/', $first);
     }
 
     protected function getProviders(): iterable

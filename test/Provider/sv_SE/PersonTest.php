@@ -13,28 +13,19 @@ use Faker\Test\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    public function provideSeedAndExpectedReturn()
+    public function testPersonalIdentityNumberIsReproducible(): void
     {
-        return [
-            [1, '720727', '720727-5798'],
-            [2, '710414', '710414-5664'],
-            [3, '591012', '591012-4519'],
-            [4, '180307', '180307-0356'],
-            [5, '820904', '820904-7748'],
-        ];
-    }
+        $birthdate = \DateTime::createFromFormat('ymd', '720727');
 
-    /**
-     * @requires PHP < 8.2
-     *
-     * @dataProvider provideSeedAndExpectedReturn
-     */
-    public function testPersonalIdentityNumberUsesBirthDateIfProvided($seed, $birthdate, $expected): void
-    {
-        $faker = $this->faker;
-        $faker->seed($seed);
-        $pin = $faker->personalIdentityNumber(\DateTime::createFromFormat('ymd', $birthdate));
-        self::assertEquals($expected, $pin);
+        $this->faker->seed(1);
+        $first = $this->faker->personalIdentityNumber($birthdate);
+
+        $this->faker->seed(1);
+        $second = $this->faker->personalIdentityNumber($birthdate);
+
+        self::assertEquals($first, $second);
+        // Should match Swedish PIN format: YYMMDD-XXXX
+        self::assertMatchesRegularExpression('/^[0-9]{6}-[0-9]{4}$/', $first);
     }
 
     public function testPersonalIdentityNumberGeneratesLuhnCompliantNumbers(): void

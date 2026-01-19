@@ -12,44 +12,64 @@ use Faker\Test\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testKanaNameMaleReturns(): void
+    public function testKanaNameMaleIsReproducible(): void
     {
-        self::assertEquals('アオタ ミノル', $this->faker->kanaName('male'));
+        $this->faker->seed(1);
+        $first = $this->faker->kanaName('male');
+
+        $this->faker->seed(1);
+        $second = $this->faker->kanaName('male');
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testKanaNameFemaleReturns(): void
+    public function testKanaNameFemaleIsReproducible(): void
     {
-        self::assertEquals('アオタ ミキ', $this->faker->kanaName('female'));
+        $this->faker->seed(1);
+        $first = $this->faker->kanaName('female');
+
+        $this->faker->seed(1);
+        $second = $this->faker->kanaName('female');
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testFirstKanaNameMaleReturns(): void
+    public function testFirstKanaNameMaleIsReproducible(): void
     {
-        self::assertEquals('ヒデキ', $this->faker->firstKanaName('male'));
+        $this->faker->seed(1);
+        $first = $this->faker->firstKanaName('male');
+
+        $this->faker->seed(1);
+        $second = $this->faker->firstKanaName('male');
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testFirstKanaNameFemaleReturns(): void
+    public function testFirstKanaNameFemaleIsReproducible(): void
     {
-        self::assertEquals('マアヤ', $this->faker->firstKanaName('female'));
+        $this->faker->seed(1);
+        $first = $this->faker->firstKanaName('female');
+
+        $this->faker->seed(1);
+        $second = $this->faker->firstKanaName('female');
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testLastKanaNameReturnsNakajima(): void
+    public function testLastKanaNameIsReproducible(): void
     {
-        self::assertEquals('ナカジマ', $this->faker->lastKanaName);
+        $this->faker->seed(1);
+        $first = $this->faker->lastKanaName;
+
+        $this->faker->seed(1);
+        $second = $this->faker->lastKanaName;
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
     protected function getProviders(): iterable

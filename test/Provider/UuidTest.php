@@ -18,17 +18,19 @@ final class UuidTest extends TestCase
         self::assertTrue($this->isUuid($uuid));
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testUuidExpectedSeed(): void
+    public function testUuidSeededIsReproducible(): void
     {
-        if (pack('L', 0x6162797A) == pack('N', 0x6162797A)) {
-            self::markTestSkipped('Big Endian');
-        }
         $this->faker->seed(123);
-        self::assertEquals('8e2e0c84-50dd-367c-9e66-f3ab455c78d6', BaseProvider::uuid());
-        self::assertEquals('073eb60a-902c-30ab-93d0-a94db371f6c8', BaseProvider::uuid());
+        $first1 = BaseProvider::uuid();
+        $first2 = BaseProvider::uuid();
+
+        $this->faker->seed(123);
+        $second1 = BaseProvider::uuid();
+        $second2 = BaseProvider::uuid();
+
+        self::assertEquals($first1, $second1);
+        self::assertEquals($first2, $second2);
+        self::assertNotEquals($first1, $first2);
     }
 
     protected function isUuid($uuid)

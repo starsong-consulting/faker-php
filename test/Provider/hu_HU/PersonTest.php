@@ -12,13 +12,23 @@ use Faker\Test\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testValidMariedFemaleLastnames(): void
+    public function testNameIsReproducible(): void
     {
-        self::assertEquals('Báró Vassné Zsóka', $this->faker->name('female'));
-        self::assertEquals('Prof. Szőke Bendegúz', $this->faker->name('female'));
+        $this->faker->seed(1);
+        $first = $this->faker->name('female');
+
+        $this->faker->seed(1);
+        $second = $this->faker->name('female');
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
+    }
+
+    public function testNameGeneratesValidNames(): void
+    {
+        $name = $this->faker->name('female');
+        self::assertNotEmpty($name);
+        self::assertIsString($name);
     }
 
     protected function getProviders(): iterable

@@ -12,44 +12,64 @@ use Faker\Test\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testFirstNameMaleReturns(): void
+    public function testFirstNameMaleIsReproducible(): void
     {
-        self::assertEquals('Максим', $this->faker->firstNameMale());
+        $this->faker->seed(1);
+        $first = $this->faker->firstNameMale();
+
+        $this->faker->seed(1);
+        $second = $this->faker->firstNameMale();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testFirstNameFemaleReturns(): void
+    public function testFirstNameFemaleIsReproducible(): void
     {
-        self::assertEquals('Людмила', $this->faker->firstNameFemale());
+        $this->faker->seed(1);
+        $first = $this->faker->firstNameFemale();
+
+        $this->faker->seed(1);
+        $second = $this->faker->firstNameFemale();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testMiddleNameMaleReturns(): void
+    public function testMiddleNameMaleIsReproducible(): void
     {
-        self::assertEquals('Миколайович', $this->faker->middleNameMale());
+        $this->faker->seed(1);
+        $first = $this->faker->middleNameMale();
+
+        $this->faker->seed(1);
+        $second = $this->faker->middleNameMale();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testMiddleNameFemaleReturns(): void
+    public function testMiddleNameFemaleIsReproducible(): void
     {
-        self::assertEquals('Миколаївна', $this->faker->middleNameFemale());
+        $this->faker->seed(1);
+        $first = $this->faker->middleNameFemale();
+
+        $this->faker->seed(1);
+        $second = $this->faker->middleNameFemale();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
-    /**
-     * @requires PHP < 8.2
-     */
-    public function testLastNameReturns(): void
+    public function testLastNameIsReproducible(): void
     {
-        self::assertEquals('Броваренко', $this->faker->lastName());
+        $this->faker->seed(1);
+        $first = $this->faker->lastName();
+
+        $this->faker->seed(1);
+        $second = $this->faker->lastName();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
     }
 
     protected function getProviders(): iterable

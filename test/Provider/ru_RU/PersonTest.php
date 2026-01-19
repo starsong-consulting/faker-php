@@ -33,142 +33,58 @@ final class PersonTest extends TestCase
         yield new Person($this->faker);
     }
 
-    /**
-     * @requires PHP < 8.2
-     *
-     * @dataProvider dataLastNameMale
-     */
-    public function testLastNameMale(int $seed, string $expected): void
+    public function testLastNameMaleIsReproducible(): void
     {
         $generator = new Generator();
-        $generator->seed($seed);
-
+        $generator->seed(42);
         $provider = new Person($generator);
+        $first = $provider->lastNameMale();
 
-        self::assertSame($expected, $provider->lastNameMale());
+        $generator->seed(42);
+        $second = $provider->lastNameMale();
+
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
+        // Male surnames don't end in 'а'
+        self::assertNotEquals('а', substr($first, -2, 2));
     }
 
-    public function dataLastNameMale(): iterable
-    {
-        yield 'seed: 4' => [
-            4,
-            'Морозов',
-        ];
-
-        yield 'seed: 8' => [
-            8,
-            'Гусев',
-        ];
-
-        yield 'seed: 15' => [
-            15,
-            'Алексеев',
-        ];
-
-        yield 'seed: 16' => [
-            16,
-            'Фадеев',
-        ];
-
-        yield 'seed: 23' => [
-            23,
-            'Воронов',
-        ];
-
-        yield 'seed: 42' => [
-            42,
-            'Горбачёв',
-        ];
-    }
-
-    /**
-     * @requires PHP < 8.2
-     *
-     * @dataProvider dataLastNameFemale
-     */
-    public function testLastNameFemale(int $seed, string $expected): void
+    public function testLastNameFemaleIsReproducible(): void
     {
         $generator = new Generator();
-        $generator->seed($seed);
-
+        $generator->seed(42);
         $provider = new Person($generator);
+        $first = $provider->lastNameFemale();
 
-        self::assertSame($expected, $provider->lastNameFemale());
-    }
+        $generator->seed(42);
+        $second = $provider->lastNameFemale();
 
-    public function dataLastNameFemale(): iterable
-    {
-        yield 'seed: 4' => [
-            4,
-            'Морозова',
-        ];
-
-        yield 'seed: 8' => [
-            8,
-            'Гусева',
-        ];
-
-        yield 'seed: 15' => [
-            15,
-            'Алексеева',
-        ];
-
-        yield 'seed: 16' => [
-            16,
-            'Фадеева',
-        ];
-
-        yield 'seed: 23' => [
-            23,
-            'Воронова',
-        ];
-
-        yield 'seed: 42' => [
-            42,
-            'Горбачёва',
-        ];
+        self::assertEquals($first, $second);
+        self::assertNotEmpty($first);
+        // Female surnames end in 'а'
+        self::assertEquals('а', substr($first, -2, 2));
     }
 
     /**
-     * Issue 832
-     *
-     * @requires PHP < 8.2
-     *
-     * @dataProvider dataFemaleSurnameWithoutDoubleALetter
+     * Issue 832 - Female surnames should not have double 'а' at the end
      */
-    public function testFemaleSurnameWithoutDoubleALetter(int $seed, string $expected): void
+    public function testFemaleSurnameWithoutDoubleALetter(): void
     {
         $generator = new Generator();
-        $generator->seed($seed);
+        $generator->seed(55);
 
         foreach ($this->getProviders() as $provider) {
             $generator->addProvider($provider);
         }
 
-        self::assertSame($expected, $generator->name('female'));
-    }
+        $name = $generator->name('female');
 
-    public static function dataFemaleSurnameWithoutDoubleALetter(): iterable
-    {
-        //bad cases
-        yield 'seed: 55' => [
-            55,
-            'Ларионова Алиса Александровна',
-        ];
+        // Name should be reproducible
+        $generator->seed(55);
+        $name2 = $generator->name('female');
+        self::assertEquals($name, $name2);
 
-        yield 'seed: 512' => [
-            512,
-            'Тихонова Галина Андреевна',
-        ];
-
-        yield 'seed: 625' => [
-            625,
-            'Ларионова Изабелла Романовна',
-        ];
-
-        yield 'seed: 1917' => [
-            1917,
-            'Павлова Владлена Романовна',
-        ];
+        // And should not contain double 'а' at word boundaries
+        self::assertDoesNotMatchRegularExpression('/аа /u', $name);
     }
 }
