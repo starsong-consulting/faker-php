@@ -297,22 +297,30 @@ class Payment extends Base
     }
 
     /**
-     * Return the String of a SWIFT/BIC number
+     * Return the String of a SWIFT/BIC number.
      *
      * @example 'RZTIAT22263'
      *
      * @see    http://en.wikipedia.org/wiki/ISO_9362
      *
+     * @param string|null $countryCode ISO 3166-1 alpha-2 country code
+     *
      * @return string Swift/Bic number
      */
-    public static function swiftBicNumber(): string
+    public static function swiftBicNumber(?string $countryCode = null): string
     {
+        if (null !== $countryCode && 1 !== preg_match('/^[A-Z]{2}$/', $countryCode)) {
+            throw new \InvalidArgumentException('Invalid country code format.');
+        }
+
         // BIC format per ISO 9362:
         // - 4 letters: bank code
         // - 2 letters: country code (ISO 3166-1 alpha-2)
         // - 1 letter/digit: location code char 1 (0 and 1 not used)
         // - 1 letter/digit: location code char 2 (O not used, could be confused with 0)
         // - 3 letters/digits: branch code (optional, XXX for primary office)
-        return self::regexify('^[A-Z]{4}[A-Z]{2}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$');
+        $country = $countryCode ?? Miscellaneous::countryCode();
+
+        return self::regexify('^[A-Z]{4}' . $country . '[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$');
     }
 }

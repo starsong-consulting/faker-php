@@ -189,6 +189,22 @@ final class PaymentTest extends TestCase
         self::assertTrue(Iban::isValid($iban), "Checksum for $iban is invalid");
     }
 
+    public function testSwiftBicNumber(): void
+    {
+        self::assertMatchesRegularExpression(
+            '/^[A-Z]{4}[A-Z]{2}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$/',
+            $this->faker->swiftBicNumber(),
+        );
+    }
+
+    public function testSwiftBicNumberWithCountryCode(): void
+    {
+        self::assertMatchesRegularExpression(
+            '/^[A-Z]{4}DE[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$/',
+            $this->faker->swiftBicNumber('DE'),
+        );
+    }
+
     protected function getProviders(): iterable
     {
         yield new BaseProvider($this->faker);

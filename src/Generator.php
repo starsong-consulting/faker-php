@@ -444,7 +444,7 @@ use Faker\Provider\Base;
  *
  * @property string $swiftBicNumber
  *
- * @method string swiftBicNumber()
+ * @method string swiftBicNumber($countryCode = null)
  *
  * @property string $name
  *
