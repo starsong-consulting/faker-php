@@ -13,7 +13,7 @@ final class PaymentTest extends TestCase
 {
     public function testBankAccountNumber(): void
     {
-        $accNo = $this->faker->bankAccountNumber;
+        $accNo = $this->faker->bankAccountNumber();
         self::assertSame(substr($accNo, 0, 2), 'TR');
         self::assertSame(26, strlen($accNo));
     }

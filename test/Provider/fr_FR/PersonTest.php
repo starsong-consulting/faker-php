@@ -20,7 +20,7 @@ final class PersonTest extends TestCase
 
     public function testNIRReturnsTheRightPattern(): void
     {
-        $nir = $this->faker->nir;
+        $nir = $this->faker->nir();
         self::assertMatchesRegularExpression("/^[12]\d{5}[0-9A-B]\d{8}$/", $nir);
     }
 

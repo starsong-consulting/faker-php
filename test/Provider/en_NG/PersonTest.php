@@ -14,7 +14,7 @@ final class PersonTest extends TestCase
 {
     public function testPersonNameIsAValidString(): void
     {
-        $name = $this->faker->name;
+        $name = $this->faker->name();
 
         self::assertNotEmpty($name);
         self::assertIsString($name);

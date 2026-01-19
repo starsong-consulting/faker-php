@@ -15,7 +15,7 @@ final class PhoneNumberTest extends TestCase
     public function testMobileNumber(): void
     {
         for ($i = 0; $i < 10; ++$i) {
-            $number = $this->faker->mobileNumber;
+            $number = $this->faker->mobileNumber();
             $length = strlen($number);
 
             // Check that number starts with 4 or 9 when country code is included

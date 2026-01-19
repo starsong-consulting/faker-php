@@ -15,10 +15,10 @@ final class InternetTest extends TestCase
     public function testUserNameIsReproducible(): void
     {
         $this->faker->seed(1);
-        $first = $this->faker->userName;
+        $first = $this->faker->userName();
 
         $this->faker->seed(1);
-        $second = $this->faker->userName;
+        $second = $this->faker->userName();
 
         self::assertEquals($first, $second);
         self::assertMatchesRegularExpression('/^[a-z0-9._]+$/', $first);
@@ -27,10 +27,10 @@ final class InternetTest extends TestCase
     public function testDomainNameIsReproducible(): void
     {
         $this->faker->seed(1);
-        $first = $this->faker->domainName;
+        $first = $this->faker->domainName();
 
         $this->faker->seed(1);
-        $second = $this->faker->domainName;
+        $second = $this->faker->domainName();
 
         self::assertEquals($first, $second);
         self::assertMatchesRegularExpression('/^[a-z]+\.[a-z]+$/', $first);

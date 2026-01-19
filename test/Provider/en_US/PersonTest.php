@@ -15,7 +15,7 @@ final class PersonTest extends TestCase
     public function testSsn(): void
     {
         for ($i = 0; $i < 100; ++$i) {
-            $number = $this->faker->ssn;
+            $number = $this->faker->ssn();
 
             // should be in the format ###-##-####
             self::assertMatchesRegularExpression('/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/', $number);

@@ -44,7 +44,7 @@ final class PersonTest extends TestCase
     {
         $validLicenceCodes = ['A', 'A1', 'B', 'C', 'C1', 'C2', 'EB', 'EC', 'EC1', 'I', 'L', 'L1'];
 
-        self::assertContains($this->faker->licenceCode, $validLicenceCodes);
+        self::assertContains($this->faker->licenceCode(), $validLicenceCodes);
     }
 
     public function testMaleTitles(): void

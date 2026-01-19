@@ -48,26 +48,26 @@ final class PhoneNumberTest extends TestCase
 
     public function testTollFreeInternationalNumber(): void
     {
-        self::assertMatchesRegularExpression('/^800\s*\d{3}\s*\d{4}$/', $this->faker->tollFreeInternationalNumber);
+        self::assertMatchesRegularExpression('/^800\s*\d{3}\s*\d{4}$/', $this->faker->tollFreeInternationalNumber());
     }
 
     public function testTollFreeLineNumber(): void
     {
-        self::assertMatchesRegularExpression('/^1800\s*\d{3}\s*\d{4}$/', $this->faker->tollFreeLineNumber);
+        self::assertMatchesRegularExpression('/^1800\s*\d{3}\s*\d{4}$/', $this->faker->tollFreeLineNumber());
     }
 
     public function testPremiumPhoneNumber(): void
     {
-        self::assertMatchesRegularExpression('/^1900\s*\d{3}\s*\d{4}$/', $this->faker->premiumPhoneNumber);
+        self::assertMatchesRegularExpression('/^1900\s*\d{3}\s*\d{4}$/', $this->faker->premiumPhoneNumber());
     }
 
     public function testFixedLineNumber(): void
     {
-        self::assertMatchesRegularExpression('/^(\+65|65)?\s*6\d{3}\s*\d{4}$/', $this->faker->fixedLineNumber);
+        self::assertMatchesRegularExpression('/^(\+65|65)?\s*6\d{3}\s*\d{4}$/', $this->faker->fixedLineNumber());
     }
 
     public function testVoipNumber(): void
     {
-        self::assertMatchesRegularExpression('/^(\+65|65)?\s*3\d{3}\s*\d{4}$/', $this->faker->voipNumber);
+        self::assertMatchesRegularExpression('/^(\+65|65)?\s*3\d{3}\s*\d{4}$/', $this->faker->voipNumber());
     }
 }

@@ -15,7 +15,7 @@ final class PersonTest extends TestCase
     public function testNationalCode(): void
     {
         for ($i = 0; $i < 100; ++$i) {
-            $nationalCode = $this->faker->nationalCode;
+            $nationalCode = $this->faker->nationalCode();
 
             // nationalCode should be in the format ##########
             self::assertMatchesRegularExpression('/^[0-9]{10}$/', $nationalCode);

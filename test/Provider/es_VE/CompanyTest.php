@@ -18,7 +18,7 @@ final class CompanyTest extends TestCase
     public function testNationalId(): void
     {
         $pattern = '/^[VJGECP]-?\d{8}-?\d$/';
-        $rif = $this->faker->taxpayerIdentificationNumber;
+        $rif = $this->faker->taxpayerIdentificationNumber();
         self::assertMatchesRegularExpression($pattern, $rif);
 
         $rif = $this->faker->taxpayerIdentificationNumber('-');

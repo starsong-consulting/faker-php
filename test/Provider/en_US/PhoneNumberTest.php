@@ -15,7 +15,7 @@ final class PhoneNumberTest extends TestCase
     public function testPhoneNumber(): void
     {
         for ($i = 0; $i < 100; ++$i) {
-            $number = $this->faker->phoneNumber;
+            $number = $this->faker->phoneNumber();
             $baseNumber = preg_replace('/ *x.*$/', '', $number); // Remove possible extension
             $digits = array_values(array_filter(str_split($baseNumber), 'ctype_digit'));
 
@@ -43,13 +43,13 @@ final class PhoneNumberTest extends TestCase
 
     public function testTollFreeAreaCode(): void
     {
-        self::assertContains($this->faker->tollFreeAreaCode, [800, 822, 833, 844, 855, 866, 877, 888, 880, 887, 889]);
+        self::assertContains($this->faker->tollFreeAreaCode(), [800, 822, 833, 844, 855, 866, 877, 888, 880, 887, 889]);
     }
 
     public function testTollFreePhoneNumber(): void
     {
         for ($i = 0; $i < 100; ++$i) {
-            $number = $this->faker->tollFreePhoneNumber;
+            $number = $this->faker->tollFreePhoneNumber();
             $digits = array_values(array_filter(str_split($number), 'ctype_digit'));
 
             // Prefix '1' allowed

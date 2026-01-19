@@ -15,7 +15,7 @@ final class PhoneNumberTest extends TestCase
     public function testPhoneNumber(): void
     {
         for ($i = 0; $i < 10; ++$i) {
-            $number = $this->faker->phoneNumber;
+            $number = $this->faker->phoneNumber();
 
             $digits = array_values(array_filter(str_split($number), 'ctype_digit'));
 
@@ -31,7 +31,7 @@ final class PhoneNumberTest extends TestCase
     public function testTollFreePhoneNumber(): void
     {
         for ($i = 0; $i < 10; ++$i) {
-            $number = $this->faker->tollFreeNumber;
+            $number = $this->faker->tollFreeNumber();
             $digits = array_values(array_filter(str_split($number), 'ctype_digit'));
 
             if (count($digits) === 11) {
@@ -46,7 +46,7 @@ final class PhoneNumberTest extends TestCase
     public function testCellPhoneNumber(): void
     {
         for ($i = 0; $i < 10; ++$i) {
-            $number = $this->faker->mobileNumber;
+            $number = $this->faker->mobileNumber();
             $digits = array_values(array_filter(str_split($number), 'ctype_digit'));
 
             if ($digits[0] = 2 && $digits[1] == 7) {

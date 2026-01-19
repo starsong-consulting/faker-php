@@ -24,7 +24,7 @@ final class AddressTest extends TestCase
      */
     public function testCountyIsAValidString(): void
     {
-        $county = $this->faker->county;
+        $county = $this->faker->county();
 
         self::assertNotEmpty($county);
         self::assertIsString($county);
@@ -35,7 +35,7 @@ final class AddressTest extends TestCase
      */
     public function testRegionIsAValidString(): void
     {
-        $region = $this->faker->region;
+        $region = $this->faker->region();
 
         self::assertNotEmpty($region);
         self::assertIsString($region);

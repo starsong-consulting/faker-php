@@ -171,6 +171,7 @@ final class GeneratorTest extends TestCase
     public function testMagicGetCallsFormat(): void
     {
         $this->faker->addProvider(new Fixture\Provider\FooProvider());
+        // Intentionally using deprecated property access to test __get magic method
         self::assertEquals('foobar', $this->faker->fooFormatter);
     }
 

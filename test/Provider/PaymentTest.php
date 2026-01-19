@@ -19,7 +19,7 @@ final class PaymentTest extends TestCase
 {
     public function testCreditCardTypeReturnsValidVendorName(): void
     {
-        self::assertContains($this->faker->creditCardType, ['Visa', 'Visa Retired', 'MasterCard', 'American Express', 'Discover Card', 'JCB']);
+        self::assertContains($this->faker->creditCardType(), ['Visa', 'Visa Retired', 'MasterCard', 'American Express', 'Discover Card', 'JCB']);
     }
 
     public function creditCardNumberProvider()
@@ -50,14 +50,14 @@ final class PaymentTest extends TestCase
 
     public function testCreditCardExpirationDateReturnsValidDateByDefault(): void
     {
-        $expirationDate = $this->faker->creditCardExpirationDate;
+        $expirationDate = $this->faker->creditCardExpirationDate();
         self::assertGreaterThan(time(), $expirationDate->getTimestamp());
         self::assertLessThan(strtotime('+36 months'), $expirationDate->getTimestamp());
     }
 
     public function testRandomCard(): void
     {
-        $cardDetails = $this->faker->creditCardDetails;
+        $cardDetails = $this->faker->creditCardDetails();
         self::assertEquals(count($cardDetails), 4);
         self::assertEquals(['type', 'number', 'name', 'expirationDate'], array_keys($cardDetails));
     }
@@ -149,7 +149,7 @@ final class PaymentTest extends TestCase
         $this->loadLocalProvider($locale, 'Payment');
 
         try {
-            $iban = $this->faker->bankAccountNumber;
+            $iban = $this->faker->bankAccountNumber();
         } catch (\InvalidArgumentException $e) {
             // Not implemented, nothing to test
             self::markTestSkipped("bankAccountNumber not implemented for $locale");

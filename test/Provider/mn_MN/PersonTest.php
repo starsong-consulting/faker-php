@@ -14,12 +14,12 @@ final class PersonTest extends TestCase
 {
     public function testName(): void
     {
-        self::assertMatchesRegularExpression('/^[А-Я]{1}\.[\w\W]+$/u', $this->faker->name);
+        self::assertMatchesRegularExpression('/^[А-Я]{1}\.[\w\W]+$/u', $this->faker->name());
     }
 
     public function testIdNumber(): void
     {
-        self::assertMatchesRegularExpression('/^[А-Я]{2}\d{8}$/u', $this->faker->idNumber);
+        self::assertMatchesRegularExpression('/^[А-Я]{2}\d{8}$/u', $this->faker->idNumber());
     }
 
     protected function getProviders(): iterable

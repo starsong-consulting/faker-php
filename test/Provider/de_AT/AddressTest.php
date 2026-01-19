@@ -17,7 +17,7 @@ final class AddressTest extends TestCase
      */
     public function testPostcodeReturnsPostcodeThatMatchesAustrianFormat(): void
     {
-        $postcode = $this->faker->postcode;
+        $postcode = $this->faker->postcode();
 
         self::assertMatchesRegularExpression('/^[1-9]\d{3}$/', $postcode);
     }

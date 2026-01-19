@@ -14,26 +14,26 @@ final class CompanyTest extends TestCase
 {
     public function testINN(): void
     {
-        self::assertMatchesRegularExpression('/^[0-9]{10}$/', $this->faker->inn10);
+        self::assertMatchesRegularExpression('/^[0-9]{10}$/', $this->faker->inn10());
         self::assertEquals('77', substr($this->faker->inn10('77'), 0, 2));
         self::assertEquals('02', substr($this->faker->inn10(2), 0, 2));
     }
 
     public function testKPP(): void
     {
-        self::assertMatchesRegularExpression('/^[0-9]{9}$/', $this->faker->kpp);
-        self::assertEquals('01001', substr($this->faker->kpp, -5, 5));
-        $inn10 = $this->faker->inn10;
+        self::assertMatchesRegularExpression('/^[0-9]{9}$/', $this->faker->kpp());
+        self::assertEquals('01001', substr($this->faker->kpp(), -5, 5));
+        $inn10 = $this->faker->inn10();
         self::assertEquals(substr($inn10, 0, 4), substr($this->faker->kpp($inn10), 0, 4));
     }
 
     public function testCatchPhrase(): void
     {
-        $phrase = $this->faker->catchPhrase;
+        $phrase = $this->faker->catchPhrase();
         self::assertNotNull($phrase);
         self::assertGreaterThanOrEqual(
             3,
-            count(explode(' ', $this->faker->catchPhrase)),
+            count(explode(' ', $this->faker->catchPhrase())),
             "'$phrase' - should be contain 3 word",
         );
     }

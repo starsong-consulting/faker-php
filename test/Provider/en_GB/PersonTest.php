@@ -14,7 +14,7 @@ final class PersonTest extends TestCase
 {
     public function testNationalInsuranceNumber(): void
     {
-        $result = $this->faker->nino;
+        $result = $this->faker->nino();
 
         self::assertMatchesRegularExpression('/^[A-Z]{2}\d{6}[A-Z]{1}$/', $result);
 

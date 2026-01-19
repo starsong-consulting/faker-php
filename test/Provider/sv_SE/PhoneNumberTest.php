@@ -15,7 +15,7 @@ final class PhoneNumberTest extends TestCase
     public function testMobileNumber(): void
     {
         for ($i = 0; $i < 10; ++$i) {
-            $number = $this->faker->mobileNumber;
+            $number = $this->faker->mobileNumber();
 
             self::assertTrue(self::itStartsWithPrefix($number));
         }

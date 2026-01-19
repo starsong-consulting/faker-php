@@ -14,7 +14,7 @@ final class CompanyTest extends TestCase
 {
     public function testVAT(): void
     {
-        self::assertEquals(8, floor(log10($this->faker->VAT) + 1));
+        self::assertEquals(8, floor(log10($this->faker->VAT()) + 1));
     }
 
     protected function getProviders(): iterable

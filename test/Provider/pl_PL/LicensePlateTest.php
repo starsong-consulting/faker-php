@@ -17,7 +17,7 @@ final class LicensePlateTest extends TestCase
     public function testNonSpecialLicensePlates(): void
     {
         for ($i = 0; $i < 40; ++$i) {
-            $licensePlate = $this->faker->licensePlate;
+            $licensePlate = $this->faker->licensePlate();
             self::assertNotEmpty($licensePlate);
             self::assertIsString($licensePlate);
             self::assertMatchesRegularExpression('/^(?:[A-GI-TV-Z][A-PR-Z] [A-PR-Z\d]{5}|[A-GI-TV-Z][A-PR-Z]{2} [A-PR-Z\d]{4,5})$/', $licensePlate);

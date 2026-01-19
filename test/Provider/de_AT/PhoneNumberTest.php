@@ -14,7 +14,7 @@ final class PhoneNumberTest extends TestCase
 {
     public function testPhoneNumberFormat(): void
     {
-        $number = $this->faker->phoneNumber;
+        $number = $this->faker->phoneNumber();
         self::assertMatchesRegularExpression('/^06\d{2} \d{7}|\+43 \d{4} \d{4}(-\d{2})?$/', $number);
     }
 

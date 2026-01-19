@@ -14,7 +14,7 @@ final class PersonTest extends TestCase
 {
     public function testDNI(): void
     {
-        self::assertTrue($this->isValidDNI($this->faker->dni));
+        self::assertTrue($this->isValidDNI($this->faker->dni()));
     }
 
     // validation taken from http://kiwwito.com/php-function-for-spanish-dni-nie-validation/
@@ -36,7 +36,7 @@ final class PersonTest extends TestCase
     {
         $validLicenceCodes = ['AM', 'A1', 'A2', 'A', 'B', 'B+E', 'C1', 'C1+E', 'C', 'C+E', 'D1', 'D1+E', 'D', 'D+E'];
 
-        self::assertContains($this->faker->licenceCode, $validLicenceCodes);
+        self::assertContains($this->faker->licenceCode(), $validLicenceCodes);
     }
 
     protected function getProviders(): iterable

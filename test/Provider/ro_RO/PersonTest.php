@@ -80,7 +80,7 @@ final class PersonTest extends TestCase
 
     public function testAllRandomReturnsValidCnp(): void
     {
-        $cnp = $this->faker->cnp;
+        $cnp = $this->faker->cnp();
         self::assertTrue(
             $this->isValidCnp($cnp),
             sprintf("Invalid CNP '%' generated", $cnp),

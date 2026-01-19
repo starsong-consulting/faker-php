@@ -63,10 +63,10 @@ final class PersonTest extends TestCase
     public function testLastKanaNameIsReproducible(): void
     {
         $this->faker->seed(1);
-        $first = $this->faker->lastKanaName;
+        $first = $this->faker->lastKanaName();
 
         $this->faker->seed(1);
-        $second = $this->faker->lastKanaName;
+        $second = $this->faker->lastKanaName();
 
         self::assertEquals($first, $second);
         self::assertNotEmpty($first);

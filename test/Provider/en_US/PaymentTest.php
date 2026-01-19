@@ -13,14 +13,14 @@ final class PaymentTest extends TestCase
 {
     public function testBankAccountNumber(): void
     {
-        $accNo = $this->faker->bankAccountNumber;
+        $accNo = $this->faker->bankAccountNumber();
         self::assertTrue(ctype_digit($accNo));
         self::assertLessThanOrEqual(17, strlen($accNo));
     }
 
     public function testBankRoutingNumber(): void
     {
-        $routingNo = $this->faker->bankRoutingNumber;
+        $routingNo = $this->faker->bankRoutingNumber();
         self::assertMatchesRegularExpression('/^\d{9}$/', $routingNo);
         self::assertEquals(Payment::calculateRoutingNumberChecksum($routingNo), $routingNo[8]);
     }

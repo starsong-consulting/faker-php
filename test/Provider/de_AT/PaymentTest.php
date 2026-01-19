@@ -22,7 +22,7 @@ final class PaymentTest extends TestCase
 
     public function testBankAccountNumber(): void
     {
-        $accNo = $this->faker->bankAccountNumber;
+        $accNo = $this->faker->bankAccountNumber();
         self::assertEquals(substr($accNo, 0, 2), 'AT');
         self::assertEquals(20, strlen($accNo));
     }

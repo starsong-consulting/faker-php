@@ -15,21 +15,21 @@ final class PersonTest extends TestCase
 {
     public function testIdNumber(): void
     {
-        $idNumber = $this->faker->idNumber;
+        $idNumber = $this->faker->idNumber();
         self::assertMatchesRegularExpression('/^[1|2]\d{9}$/', $idNumber);
         self::assertTrue(Luhn::isValid($idNumber));
     }
 
     public function testNationalIdNumber(): void
     {
-        $nationalIdNumber = $this->faker->nationalIdNumber;
+        $nationalIdNumber = $this->faker->nationalIdNumber();
         self::assertMatchesRegularExpression('/^1\d{9}$/', $nationalIdNumber);
         self::assertTrue(Luhn::isValid($nationalIdNumber));
     }
 
     public function testForeignerIdNumber(): void
     {
-        $foreignerIdNumber = $this->faker->foreignerIdNumber;
+        $foreignerIdNumber = $this->faker->foreignerIdNumber();
         self::assertMatchesRegularExpression('/^2\d{9}$/', $foreignerIdNumber);
         self::assertTrue(Luhn::isValid($foreignerIdNumber));
     }

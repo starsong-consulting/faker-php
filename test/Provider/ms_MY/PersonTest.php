@@ -17,7 +17,7 @@ final class PersonTest extends TestCase
      */
     public function testPersonalIdentityCardNumber(): void
     {
-        $myKadNumber = $this->faker->myKadNumber;
+        $myKadNumber = $this->faker->myKadNumber();
 
         $yy = substr($myKadNumber, 0, 2);
         //match any year from 00-99

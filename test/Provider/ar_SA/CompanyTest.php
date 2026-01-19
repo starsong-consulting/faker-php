@@ -15,7 +15,7 @@ final class CompanyTest extends TestCase
 {
     public function testCompanyIdNumberIsValid(): void
     {
-        $companyIdNumber = $this->faker->companyIdNumber;
+        $companyIdNumber = $this->faker->companyIdNumber();
         self::assertMatchesRegularExpression('/^700\d{7}$/', $companyIdNumber);
         self::assertTrue(Luhn::isValid($companyIdNumber));
     }
