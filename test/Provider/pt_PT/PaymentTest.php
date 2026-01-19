@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Faker\Test\Provider\pt_PT;
 
 use Faker\Calculator\Iban;
@@ -33,7 +35,7 @@ final class PaymentTest extends TestCase
     {
         $iban = $this->faker->iban('PT');
 
-        self::assertSame(25, strlen($iban), "PT IBAN should be 25 characters long");
+        self::assertSame(25, strlen($iban), 'PT IBAN should be 25 characters long');
     }
 
     public function testIbanStartsWithPT(): void
@@ -66,12 +68,12 @@ final class PaymentTest extends TestCase
         $expectedCheckDigits = 98 - Iban::mod97($nibWithoutCheck . '00');
         $expectedCheckDigits = str_pad((string) $expectedCheckDigits, 2, '0', STR_PAD_LEFT);
 
-        self::assertSame($expectedCheckDigits, $nibCheckDigits, "NIB check digits should be correctly calculated");
+        self::assertSame($expectedCheckDigits, $nibCheckDigits, 'NIB check digits should be correctly calculated');
     }
 
     public function testMultipleIbansAreAllValid(): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $iban = $this->faker->iban('PT');
             self::assertTrue(Iban::isValid($iban), "IBAN $iban should be valid");
         }

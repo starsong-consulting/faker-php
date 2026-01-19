@@ -121,8 +121,8 @@ class Person extends \Faker\Provider\Person
      *
      * @see http://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
      *
-     * @param string $gender Person::GENDER_MALE || Person::GENDER_FEMALE
-     * @param bool $withCentury Include century in output (XXXXXXXX-XXXX vs XXXXXX-XXXX)
+     * @param string $gender      Person::GENDER_MALE || Person::GENDER_FEMALE
+     * @param bool   $withCentury Include century in output (XXXXXXXX-XXXX vs XXXXXX-XXXX)
      *
      * @return string on format XXXXXX-XXXX or XXXXXXXX-XXXX
      */

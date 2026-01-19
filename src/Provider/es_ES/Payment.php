@@ -80,7 +80,7 @@ class Payment extends \Faker\Provider\Payment
         $sum = 0;
         $digits = str_pad($digits, 10, '0', STR_PAD_LEFT);
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $sum += (int) $digits[$i] * self::$mod11Weights[$i];
         }
 

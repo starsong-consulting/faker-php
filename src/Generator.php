@@ -738,8 +738,6 @@ class Generator
      *
      * @param int $min Minimum value
      * @param int $max Maximum value
-     *
-     * @return int
      */
     public function randomInt(int $min = 0, int $max = 2147483647): int
     {

@@ -31,7 +31,7 @@ class Address extends \Faker\Provider\Address
         'Gani Elshani',
         'Lidhja e Prizrenit',
         'Marin Barleti',
-        'Haxhi Zeka'
+        'Haxhi Zeka',
     ];
 
     protected static $cityFormats = [

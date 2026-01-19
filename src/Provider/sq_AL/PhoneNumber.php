@@ -20,7 +20,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
      */
     protected static $mobileFormats = [
         '06[78][2-9]\d{6}',
-        '069\d{7}'
+        '069\d{7}',
     ];
 
     /**

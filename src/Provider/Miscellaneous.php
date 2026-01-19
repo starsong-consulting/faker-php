@@ -229,7 +229,7 @@ class Miscellaneous extends Base
      * Return a boolean, true or false.
      *
      * @param float|int $chanceOfGettingTrue Between 0 (always get false) and 100 (always get true).
-     *                                        Can also be a float between 0.0 and 1.0 for precise probability.
+     *                                       Can also be a float between 0.0 and 1.0 for precise probability.
      *
      * @return bool
      *
@@ -239,7 +239,7 @@ class Miscellaneous extends Base
     {
         // Normalize to 0.0-1.0 range if given as percentage (> 1)
         if ($chanceOfGettingTrue > 1) {
-            $chanceOfGettingTrue = $chanceOfGettingTrue / 100;
+            $chanceOfGettingTrue /= 100;
         }
 
         // Use high-precision random float generation

@@ -285,6 +285,7 @@ final class GeneratorTest extends TestCase
 
         // All generated words should be unique
         self::assertCount(3, array_unique($generatedWords));
+
         // All generated words should be from the source list
         foreach ($generatedWords as $word) {
             self::assertContains($word, $words);
