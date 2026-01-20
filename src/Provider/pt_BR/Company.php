@@ -14,6 +14,24 @@ class Company extends \Faker\Provider\Company
         '{{lastName}} Comercial Ltda.',
     ];
 
+    /**
+     * Brazilian job titles
+     *
+     * @see http://www.mtecbo.gov.br/cbosite/pages/downloads.jsf
+     */
+    protected static $jobTitleFormat = [
+        'Advogado', 'Ajudante de Obras', 'Alfaiate', 'Analista de Sistemas', 'Arquivista',
+        'Assistente Social', 'Atendente de Loja', 'Auxiliar Administrativo', 'Auxiliar de Enfermagem',
+        'Auxiliar de Escritório', 'Auxiliar de Limpeza', 'Bombeiro civil', 'Chapeiro', 'Contador',
+        'Costureira em geral', 'Cozinheiro geral', 'Desenhista Técnico', 'Eletricista', 'Enfermeiro',
+        'Engenheiro Civil', 'Estoquista', 'Faxineiro', 'Ferreiro', 'Gerente de marketing', 'Gerente de recursos humanos',
+        'Guarda-vidas', 'Manicure/pedicure', 'Manobrista', 'Mecânico', 'Médico clínico geral', 'Motorista de caminhão',
+        'Operador de Caixa', 'Operador de Telemarketing', 'Pedreiro', 'Produtor rural na agropecuária',
+        'Professor de Ensino Fundamental', 'Professor de inglês', 'Programador de sistemas de informação',
+        'Recepcionista', 'Secretária', 'Servente de Obras', 'Soldador', 'Supervisor Administrativo',
+        'Técnico em Administração', 'Técnico em Segurança do Trabalho', 'Veterinário',
+    ];
+
     protected static $companySuffix = ['e Filhos', 'e Associados', 'Ltda.', 'S.A.'];
 
     /**
